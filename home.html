@@ -195,8 +195,11 @@
             <li><a href="#">Blog/Archives</a></li>
             <li><a href="#">Want to Support Us?</a></li>
             <!-- Search Bar in Sidebar -->
-            <li><input class="form-control" type="search" placeholder="Search" aria-label="Search"></li>
-            <li><a class="btn btn-primary ms-3" href="#">Donate Now</a></li>
+            <li style="    bottom: 11px;
+    position: relative;"><input class="form-control" type="search" placeholder="Search" aria-label="Search"></li>
+            <li style="    right: 18px;
+    position: relative;
+    bottom: 23px;"><a class="btn btn-primary ms-3" href="#">Donate Now</a></li>
         </ul>
     </div>
 
@@ -252,6 +255,8 @@
         }
 
         .additional-info {
+            bottom: 83px;
+    position: relative;
             text-align: center;
             z-index: 3;
             padding: 30px 20px;
@@ -323,6 +328,13 @@
         }
 
         @media (max-width: 768px) {
+
+            .hero-section{
+                position: relative;
+
+            }
+
+
             .additional-info h2 {
                 font-size: 1.5rem;
             }
@@ -1298,7 +1310,7 @@
 
         <!-- Blog Post 3 -->
         <div class="blog-card" id="blog3">
-            <img src='./assets/home/b3.jpg" alt="Blog Post 3" class="blog-thumbnail">
+            <img src='./assets/home/b3.jpg'" alt="Blog Post 3" class="blog-thumbnail">
             <div class="blog-info">
                 <h3>Blog Post Title 3</h3>
                 <p>This is a short excerpt of the blog post. It highlights the main points to grab the reader's attention. Discover more about the topic inside.</p>
