@@ -218,13 +218,12 @@
         body {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+            overflow-x: hidden;
         }
 
-        /* Hero Section Styling */
         .hero-section {
             position: relative;
-            height: 100vh; /* Full viewport height */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -238,7 +237,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensure the video covers the section */
+            object-fit: cover;
             z-index: 0;
         }
 
@@ -248,19 +247,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay for text contrast */
+            background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
 
-        /* Styling for the additional-info content */
         .additional-info {
             text-align: center;
             z-index: 3;
             padding: 30px 20px;
             border-radius: 10px;
             max-width: 90%;
-            opacity: 0; /* Initially hidden for animation */
-            transform: translateY(50px); /* Start below */
+            opacity: 0;
+            transform: translateY(50px);
         }
 
         .additional-info h2 {
@@ -270,16 +268,20 @@
 
         .stats {
             display: flex;
-            justify-content: center;
-            gap: 30px;
+            justify-content: center; /* Centering the stats in the container */
+            align-items: center;
             margin-top: 30px;
+            gap: 30px;
+            width: 100%;
         }
 
         .stats .stat {
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            width: 200px;
+            flex: 1 1 auto;
+            max-width: 33%;
+            box-sizing: border-box;
         }
 
         .stats .stat h3 {
@@ -290,9 +292,20 @@
 
         .stats .stat p {
             font-size: 1.2rem;
+            margin: 0;
+            color: white;
+            white-space: nowrap;
+        }
+
+        /* Shift the first stat (PLATFORM FEES) to the left */
+        .stats .stat:first-child {
+            margin-right: auto; /* Push the PLATFORM FEES box to the left */
         }
 
         .hero-btn {
+            position: relative;
+            left: 10px;
+            top: 30px;
             padding: 10px 20px;
             background-color: #C9986F;
             color: #fff;
@@ -300,7 +313,7 @@
             border: none;
             border-radius: 5px;
             text-decoration: none;
-            margin-top: 30px; /* Space from additional-info section */
+            margin-top: 30px;
         }
 
         .hero-btn:hover {
@@ -314,82 +327,88 @@
                 font-size: 1.5rem;
             }
 
-            .stats .stat h3 {
-                font-size: 1.5rem;
+            .stats {
+                flex-wrap: nowrap;
+                gap: 10px;
             }
 
-            .stats .stat p {
+            .stats .stat {
+                max-width: calc(33.33% - 10px);
+                flex-basis: 33.33%;
+            }
+
+            .stats .stat h3, .stats .stat p {
                 font-size: 1rem;
+                margin: 0;
+            }
+            .div{
+                position: relative;
+                right: 40px;
+            }
+            .div h3{
+                position: relative;
+                left: 30px;
             }
         }
     </style>
 
-
-    <!-- Hero Section -->
     <section class="hero-section">
-        <!-- Video Background -->
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
-        <!-- Overlay -->
         <div class="hero-overlay"></div>
         
-        <!-- Content -->
         <div class="additional-info">
             <h2 style="color: #fff;">Need Funds to Pay For a Medical Emergency or Social Cause?</h2>
             <p style="color: #fff;">Care Foundation Trust’s 0% Platform fees ensures maximum funds for you.</p>
             
-             <div class="stats">
-        <div class="stat">
-            <h3>0%</h3>
-            <p style="color: white;">PLATFORM FEES</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="div">
+                         <h3>0%</h3>
+                    <p >PLATFORM FEES</p>
+                    </div>
+                   
+                </div>
+                <div class="stat">
+                    <h3>1 Lakh+</h3>
+                    <p>DONORS</p>
+                </div>
+                <div class="stat">
+                    <h3>10K+</h3>
+                    <p>FUNDRAISERS</p>
+                </div>
+            </div>
+            <a href="#events" class="hero-btn">Explore Events</a>
         </div>
-        <div class="stat">
-            <h3>1 Lakh+</h3>
-            <p style="color: white;">DONORS</p>
-        </div>
-        <div class="stat">
-            <h3>10K+</h3>
-            <p style="color: white;">FUNDRAISERS</p>
-        </div>
-    </div>
-
-        <!-- Explore Events Button -->
-        <a href="#events" class="hero-btn">Explore Events</a>
     </section>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- GSAP Animation -->
     <script>
-        // GSAP Hero Section Animation
         window.addEventListener("load", () => {
-            // Animate the Additional Info Section
             gsap.to(".additional-info", {
-                opacity: 1,         // Fade in
-                y: 0,               // Slide into view
-                duration: 1.5,      // Animation duration
-                ease: "power2.out", // Smooth easing
-                delay: 0.5          // Delay after page load
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: "power2.out",
+                delay: 0.5
             });
 
-            // Animate Hero Background Overlay
             gsap.fromTo(".hero-overlay", 
-                { opacity: 0 },    // Start with invisible overlay
-                { opacity: 0.5,    // Fade in to the desired opacity
-                  duration: 1,     // Animation duration
+                { opacity: 0 },    
+                { opacity: 0.5,    
+                  duration: 1,     
                   ease: "power1.inOut" }
             );
 
-            // Add animation to the "Explore Events" button
             gsap.from(".hero-btn", {
-                opacity: 0,         // Start with hidden button
-                y: 50,              // Start below the normal position
-                duration: 1.5,      // Animation duration
-                ease: "power2.out", // Smooth easing
-                delay: 2            // Delay for the button animation (after additional-info)
+                opacity: 0,
+                y: 50,
+                duration: 1.5,
+                ease: "power2.out",
+                delay: 2
             });
         });
     </script>
