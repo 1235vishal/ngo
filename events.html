@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Page - Charity Seminar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+
+       /* Hero Section */
+       .hero-section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+    
+    .hero-content {
+        top: 120px;
+        position: relative;
+        color: #B5875E;
+        padding: 20px;
+        max-width: 800px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .hero-date {
+        font-size: 1.2rem;
+    }
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    font-style: italic;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+
+        /* Image Gallery */
+        .image-gallery {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #B5875E, #F7E9D7); /* Gradient background */
+            color: #333;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 2.5rem;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #FFF;
+            font-size: 1rem;
+            padding: 10px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Modal (Lightbox) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 80%;
+            margin: auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .modal-content img {
+            width: 100%;
+        }
+        
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #FFF;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        /* CTA Button */
+        .cta {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #F7E9D7, #FFFFFF);
+            text-align: center;
+            color: #333;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            color: #B5875E;
+            margin-bottom: 15px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-button {
+            background-color: #B5875E;
+            color: #FFF;
+            padding: 15px 30px;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #8A6746;
+        }
+        
+
+        /* Contact Info Section */
+        .contact-info {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #FFFFFF, #F7E9D7);
+            text-align: center;
+            color: #333;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: #B5875E;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-email {
+            font-size: 1.5rem;
+            color: #B5875E;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-email:hover {
+            color: #8A6746;
+        }
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+        
+            .hero-date {
+                font-size: 1rem;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .event-description h2 {
+                font-size: 2rem;
+            }
+        
+            .event-description p, 
+            .event-description ul li,
+            .event-description blockquote {
+                font-size: 1rem;
+            }
+        
+            .event-description ul li {
+                padding: 8px 12px;
+            }
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        
+            .cta-content h2,
+            .contact-info h2 {
+                font-size: 2rem;
+            }
+        
+            .cta-button,
+            .contact-email {
+                font-size: 1rem;
+            }
+            .contact-info h2 {
+                font-size: 2rem;
+            }
+
+            .modal-content img {
+                max-width: 90%;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- nav start -->
+  <!-- Navbar Section -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+      /* General Styles */
+      body {
+          font-family: Arial, sans-serif;
+      }
+
+      /* Navbar styles */
+      .navbar {
+          height: 87px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          background-color: #ffffff;
+      }
+
+      .navbar-brand img {
+          width: 122px;
+          height: 68px;
+      }
+
+      /* Sidebar styles */
+      #sidebar {
+          position: fixed;
+          top: 0;
+          left: -250px; /* Initially hide sidebar */
+          width: 250px;
+          height: 100%;
+          background-color: #ffffff;
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+          transition: left 0.3s ease;
+          z-index: 999;
+      }
+
+      #sidebar.open {
+          left: 0;
+      }
+
+      #sidebar .list-unstyled {
+          padding: 0;
+          margin: 0;
+      }
+
+      #sidebar .list-unstyled li {
+          padding: 15px 20px;
+      }
+
+      #sidebar a {
+          color: #333;
+          text-decoration: none;
+      }
+
+      #sidebar a:hover {
+          background-color: #f0f0f0;
+          color: #B5875E;
+      }
+
+      /* Navbar links styles */
+      .navbar-nav .nav-link {
+          position: relative;
+          transition: color 0.3s ease;
+      }
+
+      .navbar-nav .nav-link:hover {
+          color: #B5875E;
+      }
+
+      .navbar-nav .nav-link:hover::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          background-color: #B5875E;
+          bottom: -5px;
+          left: 0;
+      }
+
+      /* Search bar and button styles */
+      .navbar-nav .form-control {
+          margin-left: 10px;
+      }
+
+      .btn-primary {
+          background-color: #B5875E !important;
+          border-color: #B5875E !important;
+      }
+
+      /* Sidebar toggle button */
+      .navbar-toggler {
+          border: none;
+      }
+
+      /* Media Query for Mobile */
+      @media (max-width: 768px) {
+          .navbar-nav {
+              display: none;
+          }
+
+          .navbar-toggler {
+              display: block;
+          }
+
+          #sidebar {
+              left: -250px; /* Initially hidden on mobile */
+          }
+
+          #sidebar.open {
+              left: 0; /* Show on toggle */
+          }
+
+          .navbar-nav {
+              flex-direction: column;
+              margin-top: 10px;
+          }
+
+          .form-control {
+              margin-top: 10px;
+              margin-bottom: 10px;
+          }
+
+          .navbar-collapse {
+              flex-grow: 0;
+          }
+      }
+  </style>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <!-- Logo on the left -->
+        <a class="navbar-brand" href="./home.html">
+            <img src="./assets/home/WhatsApp Image 2024-11-19 at 18.27.00_fd22f5b7.jpg" alt="Logo">
+        </a>
+
+        <!-- Sidebar Toggle for Mobile -->
+        <button class="navbar-toggler" type="button" id="sidebarToggle" aria-label="Toggle sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links for Desktop (Shift to left) -->
+        <div class="collapse navbar-collapse d-flex flex-grow-1 justify-content-start">
+            <ul class="navbar-nav ms-0">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="./events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Brahaspati Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Skill Enhancement Sessions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Blog/Archives</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Want to Support Us?</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Search Bar and Donate Button aligned to the right -->
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item d-flex align-items-center">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary ms-3" href="#">Donate Now</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Sidebar Section -->
+<div id="sidebar" class="sidebar">
+    <ul class="list-unstyled">
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="#">Brahaspati Publications</a></li>
+        <li><a href="#">Skill Enhancement Sessions</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog/Archives</a></li>
+        <li><a href="#">Want to Support Us?</a></li>
+        <!-- Search Bar in Sidebar -->
+        <li style="    bottom: 11px;
+position: relative;"><input class="form-control" type="search" placeholder="Search" aria-label="Search"></li>
+        <li style="    right: 18px;
+position: relative;
+bottom: 23px;"><a class="btn btn-primary ms-3" href="#">Donate Now</a></li>
+    </ul>
+</div>
+
+<!-- JavaScript for Sidebar Toggle -->
+<script>
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<!-- nav end -->
+ <!-- hero start -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+ 
+ <section class="hero-section">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="./assets/events/Video Concept for NGO to Promote Donations.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Text Content Overlay -->
+    <div class="hero-content">
+        <h1 class="hero-title">Annual Charity Seminar: Empowering Communities</h1>
+        <p class="hero-date">Saturday, December 15, 2024 | 10:00 AM - 4:00 PM</p>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        gsap.registerPlugin(ScrollTrigger);
+    
+        // Hero section fade-in on page load
+        gsap.from(".hero-video", {
+            opacity: 0,
+            scale: 1.2,
+            duration: 1.5,
+            ease: "power3.out",
+        });
+    
+        // Hero text fade and slide-up animation on page load
+        gsap.from(".hero-content", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.5,
+            ease: "power3.out",
+        });
+    
+        // Scroll-triggered animation for hero text
+        gsap.from(".hero-content h1, .hero-content p", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.3, // Delays each element
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".hero-section",
+                start: "top 80%", // Animation starts when the top of the section is at 80% of the viewport
+                end: "top 50%",  // Ends when the top reaches 50%
+                toggleActions: "play none none none", // Plays animation only on entering
+            },
+        });
+    });
+    
+</script>
+  
+<!-- end hero -->
+
+<!-- Events description start -->
+ <style>
+    .event-description {
+        padding: 50px 20px;
+        background: linear-gradient(135deg, #B5875E, #F7F4F1); /* Main color gradient */
+        color: #333;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .event-description::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('background-texture.png'); /* Add a classy texture */
+        opacity: 0.1;
+        z-index: 1;
+    }
+    
+    .description-container {
+        max-width: 80%;
+        margin: 0 auto;
+        z-index: 2;
+        position: relative;
+        text-align: center;
+    }
+    
+    .event-description h2 {
+        font-size: 2.8rem;
+        color: #FFFFFF;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    
+    .event-description p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .event-description ul {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0;
+        color: #222;
+    }
+    
+    .event-description ul li {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        background: rgba(181, 135, 94, 0.1);
+        padding: 10px 15px;
+        border-left: 5px solid #B5875E;
+        border-radius: 5px;
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .event-description blockquote {
+        font-size: 1.5rem;
+        font-style: italic;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        margin: 30px auto;
+        color: #222;
+        border-left: 5px solid #B5875E;
+        max-width: 70%;
+        border-radius: 5px;
+    }
+    
+    .event-description h3 {
+        font-size: 2rem;
+        margin: 20px 0 10px;
+        color: #444;
+    }
+    
+    @media (max-width: 768px) {
+        .event-description h2 {
+            font-size: 2rem;
+        }
+    
+        .event-description h3 {
+            font-size: 1.5rem;
+        }
+    
+        .event-description ul li {
+            font-size: 1rem;
+        }
+    }
+    
+ </style>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<section class="event-description">
+    <div class="description-container">
+        <h2>About the Event</h2>
+        <p>Join us for a day of knowledge sharing, networking, and inspiration at the <strong>Annual Charity Seminar</strong> focused on empowering underserved communities through education, sustainable development, and activism. This year, we are bringing together a diverse group of thought leaders, nonprofit organizations, and changemakers to discuss actionable strategies for improving the lives of those in need.</p>
+
+        <h3>Keynote Speaker</h3>
+        <p><strong>Dr. John Doe</strong> is an internationally recognized social activist and speaker. He has spent over two decades advocating for marginalized communities, and he will be sharing his experiences and the latest research on community development.</p>
+
+        <h3>Event Highlights:</h3>
+        <ul>
+            <li>Inspiring keynote speeches from renowned thought leaders.</li>
+            <li>Interactive workshops on building sustainable projects in local communities.</li>
+            <li>Panel discussion on the role of technology in improving healthcare access.</li>
+            <li>Networking opportunities with NGO leaders, philanthropists, and activists.</li>
+        </ul>
+
+        <blockquote>
+            “The future of our communities depends on our ability to collaborate and take action today. Join us and be a part of this transformative experience.” - Dr. John Doe
+        </blockquote>
+
+        <p>This event is an excellent opportunity for those looking to make a positive impact and contribute to a better, more sustainable future. Whether you're a nonprofit professional, a social entrepreneur, or a concerned citizen, you will leave with the tools, knowledge, and inspiration to drive change in your community.</p>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        gsap.registerPlugin(ScrollTrigger);
+    
+        // Fade-in and slide-up animation for the description container
+        gsap.from(".event-description .description-container", {
+            opacity: 0,
+            y: 50,
+            duration: 1.5,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".event-description",
+                start: "top 80%", // Start animation when the section comes into view
+                end: "top 50%",   // End animation when the top reaches 50% of the viewport
+                toggleActions: "play none none none", // Play on entering, no actions when leaving
+            }
+        });
+    
+        // Animate list items (ul li)
+        gsap.from(".event-description ul li", {
+            opacity: 0,
+            x: -50,
+            duration: 0.7,
+            stagger: 0.3,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".event-description",
+                start: "top 70%", // Start animation when the section comes into view
+            }
+        });
+    
+        // Fade-in and slide-up for blockquote text
+        gsap.from(".event-description blockquote", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".event-description",
+                start: "top 70%", // Start animation when section reaches the viewport
+            }
+        });
+    
+        // Animate headings (h2, h3) with fade and slide effects
+        gsap.from(".event-description h2, .event-description h3", {
+            opacity: 0,
+            y: 30,
+            duration: 1.2,
+            stagger: 0.3,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".event-description",
+                start: "top 80%", // Start animation when section comes into the viewport
+            }
+        });
+    });
+    
+</script>
+<!-- End -->
+
+
+    
+  <!-- Image Gallery -->
+<section class="image-gallery">
+    <h2 class="gallery-title">Event Highlights from Previous Seminars</h2>
+    <div class="gallery">
+        <div class="gallery-item" onclick="openModal('./assets/events/main-banner1.jpg')">
+            <img src="./assets/events/main-banner1.jpg" alt="Previous event photo 1">
+            <div class="gallery-caption">Inspiring Workshop on Community Engagement</div>
+        </div>
+        <div class="gallery-item" onclick="openModal('./assets/events/main-banner2.jpg')">
+            <img src="./assets/events/main-banner2.jpg" alt="Previous event photo 2">
+            <div class="gallery-caption">Networking with Industry Leaders</div>
+        </div>
+        <div class="gallery-item" onclick="openModal('./main-banner1.jpg')">
+            <img src="./assets/events/main-banner1.jpg" alt="Previous event photo 1">
+            <div class="gallery-caption">Inspiring Workshop on Community Engagement</div>
+        </div>
+        <div class="gallery-item" onclick="openModal('./assets/events/main-banner2.jpg')">
+            <img src="./assets/events/main-banner2.jpg" alt="Previous event photo 2">
+            <div class="gallery-caption">Networking with Industry Leaders</div>
+        </div>
+        <!-- Add more gallery items as needed -->
+    </div>
+</section>
+
+<!-- Modal (Lightbox) -->
+<div class="modal" id="imageModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img src="" alt="Modal Image" id="modalImage">
+    </div>
+</div>
+
+<!-- Call to Action -->
+<section class="cta">
+    <div class="cta-content">
+        <h2>Ready to Make a Difference?</h2>
+        <p>Be a part of this transformative event and help create a better future.</p>
+        <a href="#register" class="cta-button">Register Now</a>
+    </div>
+</section>
+
+<!-- Contact Info -->
+<section class="contact-info">
+    <h2>Get in Touch</h2>
+    <p>If you have any questions or need further information, don't hesitate to contact us:</p>
+    <a href="mailto:info@charityseminar.com" class="contact-email">info@charityseminar.com</a>
+</section>
+
+    <script>
+        // Modal functionality
+        function openModal(imageUrl) {
+            document.getElementById("modalImage").src = imageUrl;
+            document.getElementById("imageModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // Close modal if clicked outside the image
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("imageModal")) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
