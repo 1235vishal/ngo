@@ -15,56 +15,23 @@
         }
 
 
-       /* Hero Section */
-       .hero-section {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+       /* Hero section - Title & Date */
+       .event-title {
         text-align: center;
+        padding: 50px 20px;
+        background: linear-gradient(to bottom, #CFB298, #1C1C1C);
+        color: white;
     }
-    
-    .hero-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
-    }
-    
-    .hero-content {
-        top: 120px;
-        position: relative;
-        color: #B5875E;
-        padding: 20px;
-        max-width: 800px;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
+
+    .event-title h1 {
+        font-size: 3.5rem;
         margin-bottom: 10px;
     }
-    
-    .hero-date {
+
+    .event-title p {
         font-size: 1.2rem;
+        font-style: italic;
     }
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    font-style: italic;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
-
 
         /* Image Gallery */
         .image-gallery {
@@ -229,19 +196,12 @@
 }
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
+            .event-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .event-description h2 {
                 font-size: 2rem;
-            }
-        
-            .hero-date {
-                font-size: 1rem;
-            }
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-        
-            .hero-content p {
-                font-size: 1rem;
             }
             .event-description h2 {
                 font-size: 2rem;
@@ -426,7 +386,7 @@
         <div class="collapse navbar-collapse d-flex flex-grow-1 justify-content-start">
             <ul class="navbar-nav ms-0">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="./events.html">Events</a>
+                    <a class="nav-link text-dark" href="./eventsmainpage.html">Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="#">Brahaspati Publications</a>
@@ -461,7 +421,7 @@
 <!-- Sidebar Section -->
 <div id="sidebar" class="sidebar">
     <ul class="list-unstyled">
-        <li><a href="./events.html">Events</a></li>
+        <li><a href="./eventsmainpage.html">Events</a></li>
         <li><a href="#">Brahaspati Publications</a></li>
         <li><a href="#">Skill Enhancement Sessions</a></li>
         <li><a href="#">About Us</a></li>
@@ -489,61 +449,11 @@ bottom: 23px;"><a class="btn btn-primary ms-3" href="#">Donate Now</a></li>
 
 <!-- nav end -->
  <!-- hero start -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
- 
- <section class="hero-section">
-    <!-- Background Video -->
-    <video autoplay muted loop playsinline class="hero-video">
-        <source src="./assets/events/Video Concept for NGO to Promote Donations.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Text Content Overlay -->
-    <div class="hero-content">
-        <h1 class="hero-title">Annual Charity Seminar: Empowering Communities</h1>
-        <p class="hero-date">Saturday, December 15, 2024 | 10:00 AM - 4:00 PM</p>
-    </div>
-</section>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        gsap.registerPlugin(ScrollTrigger);
-    
-        // Hero section fade-in on page load
-        gsap.from(".hero-video", {
-            opacity: 0,
-            scale: 1.2,
-            duration: 1.5,
-            ease: "power3.out",
-        });
-    
-        // Hero text fade and slide-up animation on page load
-        gsap.from(".hero-content", {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            delay: 0.5,
-            ease: "power3.out",
-        });
-    
-        // Scroll-triggered animation for hero text
-        gsap.from(".hero-content h1, .hero-content p", {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            stagger: 0.3, // Delays each element
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".hero-section",
-                start: "top 80%", // Animation starts when the top of the section is at 80% of the viewport
-                end: "top 50%",  // Ends when the top reaches 50%
-                toggleActions: "play none none none", // Plays animation only on entering
-            },
-        });
-    });
-    
-</script>
-  
+    <!-- Event Title and Date -->
+    <section class="event-title">
+        <h1>Annual Charity Seminar: Empowering Communities</h1>
+        <p><em>Saturday, December 15, 2024 | 10:00 AM - 4:00 PM</em></p>
+    </section>
 <!-- end hero -->
 
 <!-- Events description start -->

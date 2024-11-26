@@ -153,7 +153,7 @@
             <div class="collapse navbar-collapse d-flex flex-grow-1 justify-content-start">
                 <ul class="navbar-nav ms-0">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="./events.html">Events</a>
+                        <a class="nav-link text-dark" href="./eventsmainpage.html">Events</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="#">Brahaspati Publications</a>
@@ -188,7 +188,7 @@
     <!-- Sidebar Section -->
     <div id="sidebar" class="sidebar">
         <ul class="list-unstyled">
-            <li><a href="./events.html">Events</a></li>
+            <li><a href="./eventsmainpage.html">Events</a></li>
             <li><a href="#">Brahaspati Publications</a></li>
             <li><a href="#">Skill Enhancement Sessions</a></li>
             <li><a href="#">About Us</a></li>
@@ -327,6 +327,28 @@
             color: #fff;
         }
 
+        .view-more-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+    
+        .view-more-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #C9986F;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .view-more-btn:hover {
+            background-color: #b5875e;
+            color: #fff;
+        }
+
         @media (max-width: 768px) {
 
             .hero-section{
@@ -362,6 +384,7 @@
                 left: 30px;
             }
         }
+
     </style>
 
     <section class="hero-section">
@@ -539,7 +562,7 @@
                 <div class="event-details">
                     <h3>Inspirational Seminar</h3>
                     <p>Join us for an enlightening seminar with world-renowned speakers, focusing on personal growth and innovation.</p>
-                    <a href="#" class="event-btn">Learn More</a>
+                    <a href="./events.html" class="event-btn">Learn More</a>
                 </div>
             </div>
             <!-- Event 2 -->
@@ -548,7 +571,7 @@
                 <div class="event-details">
                     <h3>Live Concert</h3>
                     <p>Experience an unforgettable evening of live music featuring top artists in an electrifying atmosphere.</p>
-                    <a href="#" class="event-btn">Learn More</a>
+                    <a href="./events.html" class="event-btn">Learn More</a>
                 </div>
             </div>
             <!-- Event 3 -->
@@ -557,10 +580,15 @@
                 <div class="event-details">
                     <h3>Lecture Demonstration</h3>
                     <p>Dive deep into knowledge with interactive lectures and demonstrations by industry experts.</p>
-                    <a href="#" class="event-btn">Learn More</a>
+                    <a href="./events.html" class="event-btn">Learn More</a>
                 </div>
             </div>
         </div>
+  <!-- View More Button -->
+  <div class="view-more-container">
+    <a href="./eventsmainpage.html" class="view-more-btn">View More Events</a>
+</div>
+        
     </section>
 
     <!-- GSAP ScrollTrigger Animation -->

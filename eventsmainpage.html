@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eventmainpage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+</head>
+<body>
+ 
+<!-- nav start -->
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    /* Navbar styles */
+    .navbar {
+        height: 87px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #ffffff;
+    }
+
+    .navbar-brand img {
+        width: 122px;
+        height: 68px;
+    }
+
+    /* Sidebar styles */
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px; /* Initially hide sidebar */
+        width: 250px;
+        height: 100%;
+        background-color: #ffffff;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    #sidebar.open {
+        left: 0;
+    }
+
+    #sidebar .list-unstyled {
+        padding: 0;
+        margin: 0;
+    }
+
+    #sidebar .list-unstyled li {
+        padding: 15px 20px;
+    }
+
+    #sidebar a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    #sidebar a:hover {
+        background-color: #f0f0f0;
+        color: #B5875E;
+    }
+
+    /* Navbar links styles */
+    .navbar-nav .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #B5875E;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #B5875E;
+        bottom: -5px;
+        left: 0;
+    }
+
+    /* Search bar and button styles */
+    .navbar-nav .form-control {
+        margin-left: 10px;
+    }
+
+    .btn-primary {
+        background-color: #B5875E !important;
+        border-color: #B5875E !important;
+    }
+
+    /* Sidebar toggle button */
+    .navbar-toggler {
+        border: none;
+    }
+
+    /* Media Query for Mobile */
+    @media (max-width: 768px) {
+        .navbar-nav {
+            display: none;
+        }
+
+        .navbar-toggler {
+            display: block;
+        }
+
+        #sidebar {
+            left: -250px; /* Initially hidden on mobile */
+        }
+
+        #sidebar.open {
+            left: 0; /* Show on toggle */
+        }
+
+        .navbar-nav {
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .form-control {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .navbar-collapse {
+            flex-grow: 0;
+        }
+    }
+</style>
+  <!-- Navbar Section -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <!-- Logo on the left -->
+        <a class="navbar-brand" href="./home.html">
+            <img src="./assets/home/WhatsApp Image 2024-11-19 at 18.27.00_fd22f5b7.jpg" alt="Logo">
+        </a>
+
+        <!-- Sidebar Toggle for Mobile -->
+        <button class="navbar-toggler" type="button" id="sidebarToggle" aria-label="Toggle sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links for Desktop (Shift to left) -->
+        <div class="collapse navbar-collapse d-flex flex-grow-1 justify-content-start">
+            <ul class="navbar-nav ms-0">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="./events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Brahaspati Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Skill Enhancement Sessions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Blog/Archives</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Want to Support Us?</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Search Bar and Donate Button aligned to the right -->
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item d-flex align-items-center">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-primary ms-3" href="#">Donate Now</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Sidebar Section -->
+<div id="sidebar" class="sidebar">
+    <ul class="list-unstyled">
+        <li><a href="./events.html">Events</a></li>
+        <li><a href="#">Brahaspati Publications</a></li>
+        <li><a href="#">Skill Enhancement Sessions</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog/Archives</a></li>
+        <li><a href="#">Want to Support Us?</a></li>
+        <!-- Search Bar in Sidebar -->
+        <li style="    bottom: 11px;
+position: relative;"><input class="form-control" type="search" placeholder="Search" aria-label="Search"></li>
+        <li style="    right: 18px;
+position: relative;
+bottom: 23px;"><a class="btn btn-primary ms-3" href="#">Donate Now</a></li>
+    </ul>
+</div>
+
+<!-- JavaScript for Sidebar Toggle -->
+<script>
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+
+
+
+<!-- nav -->
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
+    
+        <!-- hero start -->
+    
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+        
+            .hero-section {
+                position: relative;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+        
+            .hero-video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+            }
+        
+            .hero-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+            }
+        
+            .additional-info {
+                position: relative;
+                text-align: center;
+                z-index: 3;
+                padding: 30px 20px;
+                border-radius: 10px;
+                max-width: 90%;
+                color: #fff;
+                opacity: 0;
+                transform: translateY(50px);
+            }
+        
+            .additional-info h2 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+        
+            .stats {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+                gap: 30px;
+                width: 100%;
+            }
+        
+            .stats .stat {
+                padding: 10px;
+                border-radius: 10px;
+                text-align: center;
+                flex: 1;
+                max-width: 33%;
+                box-sizing: border-box;
+            }
+        
+            .stats .stat h3 {
+                font-size: 2rem;
+                color: #C9986F;
+                margin-bottom: 10px;
+            }
+        
+            .stats .stat p {
+                font-size: 1rem;
+                margin: 0;
+                color: white;
+                line-height: 1.2;
+                word-wrap: break-word;
+            }
+        
+            @media (max-width: 768px) {
+                .additional-info h2 {
+                    font-size: 1.5rem;
+                }
+        
+                .stats {
+                    flex-direction: row; /* Stack items vertically for smaller screens */
+                    gap: 20px;
+                }
+        
+                .stats .stat {
+                    max-width: 100%;
+                }
+        
+                .stats .stat h3 {
+                    font-size: 1.5rem;
+                }
+        
+                .stats .stat p {
+                    font-size: 1rem;
+                    margin: 5px 0;
+                }
+            }
+        </style>
+        
+    
+        <section class="hero-section">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="./assets/events/41823-431406517.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+            <div class="hero-overlay"></div>
+            
+            <div class="additional-info">
+                <h2 style="color: #fff;">Join Us to Empower Communities!</h2>
+                <p style="color: #fff;">Our events bring people together for meaningful change.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <h3>75+</h3>
+                        <p>EVENTS HOSTED</p>
+                    </div>
+                    <div class="stat">
+                        <h3>15K+</h3>
+                        <p>VOLUNTEERS ENGAGED</p>
+                    </div>
+                    <div class="stat">
+                        <h3>1.5M+</h3>
+                        <p>LIVES TRANSFORMED</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            window.addEventListener("load", () => {
+                gsap.to(".additional-info", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.5,
+                    ease: "power2.out",
+                    delay: 0.5
+                });
+    
+                gsap.fromTo(".hero-overlay", 
+                    { opacity: 0 },    
+                    { opacity: 0.5,    
+                      duration: 1,     
+                      ease: "power1.inOut" }
+                );
+    
+                gsap.from(".hero-btn", {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1.5,
+                    ease: "power2.out",
+                    delay: 2
+                });
+            });
+        </script>
+        <!-- heroend -->
+
+        
+
+       <!-- Featured Events start -->
+       
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .featured-events {
+            position: relative;
+            padding: 50px 15px;
+            text-align: center;
+            background-image: url('./bakcground.png'); /* Replace with your background image URL */
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position: center; /* Centers the background image */
+            background-attachment: fixed; /* Parallax effect for desktops */
+        }
+
+        @media (max-width: 768px) {
+            .featured-events {
+                background-attachment: scroll; /* Prevent parallax on mobile for performance */
+            }
+        }
+
+        .featured-events h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff; /* White text for contrast */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Add shadow for better readability */
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.9); /* Transparent white background */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .event-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-details {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .event-details h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .event-details p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .event-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #C9986F;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .event-btn:hover {
+            background-color: #b5875e;
+            color: #fff;
+        }
+    </style>
+
+
+
+    <!-- Featured Events Section -->
+    <section class="featured-events">
+        <h1 style="color: #C9986F;">Featured Events</h1>
+        <div class="event-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <img src="./assets/home/event1.jpg" alt="Seminar" class="event-image">
+                <div class="event-details">
+                    <h3>Inspirational Seminar</h3>
+                    <p>Join us for an enlightening seminar with world-renowned speakers, focusing on personal growth and innovation.</p>
+                    <a href="./events.html" class="event-btn">Learn More</a>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <img src="./assets/home/event2.jpg" alt="Concert" class="event-image">
+                <div class="event-details">
+                    <h3>Live Concert</h3>
+                    <p>Experience an unforgettable evening of live music featuring top artists in an electrifying atmosphere.</p>
+                    <a href="./events.html" class="event-btn">Learn More</a>
+                </div>
+            </div>
+            <!-- Event 3 -->
+            <div class="event-card">
+                <img src="./assets/home/evetn3.jpg" alt="Lecture Demonstration" class="event-image">
+                <div class="event-details">
+                    <h3>Lecture Demonstration</h3>
+                    <p>Dive deep into knowledge with interactive lectures and demonstrations by industry experts.</p>
+                    <a href="./events.html" class="event-btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="event-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <img src="./assets/home/event1.jpg" alt="Seminar" class="event-image">
+                <div class="event-details">
+                    <h3>Inspirational Seminar</h3>
+                    <p>Join us for an enlightening seminar with world-renowned speakers, focusing on personal growth and innovation.</p>
+                    <a href="./events.html" class="event-btn">Learn More</a>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="event-card">
+                <img src="./assets/home/event2.jpg" alt="Concert" class="event-image">
+                <div class="event-details">
+                    <h3>Live Concert</h3>
+                    <p>Experience an unforgettable evening of live music featuring top artists in an electrifying atmosphere.</p>
+                    <a href="./events.html" class="event-btn">Learn More</a>
+                </div>
+            </div>
+            <!-- Event 3 -->
+            <div class="event-card">
+                <img src="./assets/home/evetn3.jpg" alt="Lecture Demonstration" class="event-image">
+                <div class="event-details">
+                    <h3>Lecture Demonstration</h3>
+                    <p>Dive deep into knowledge with interactive lectures and demonstrations by industry experts.</p>
+                    <a href="./events.html" class="event-btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+
+    <!-- GSAP ScrollTrigger Animation -->
+    <script>
+        // GSAP ScrollTrigger for Featured Events
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener("load", () => {
+            // Create ScrollTrigger animation for each event card
+            const cards = document.querySelectorAll(".event-card");
+
+            // Animation for event cards when they enter the viewport
+            gsap.to(cards, {
+                scrollTrigger: {
+                    trigger: ".featured-events",  // Trigger animation when the featured events section is in view
+                    start: "top bottom",          // When the top of the section hits the bottom of the viewport
+                    end: "bottom top",            // When the bottom of the section hits the top of the viewport
+                    scrub: true,                  // Smooth animation as you scroll
+                    toggleActions: "play none none reverse" // Actions to trigger (play when in view, reverse when out of view)
+                },
+                opacity: 1,                     // Fade in the event card
+                scale: 1,                       // Scale up the event card to its normal size
+                duration: 1,                    // Animation duration
+                stagger: 0.2,                   // Stagger animations for each card
+                ease: "power3.out"              // Smooth easing
+            });
+
+            // Add hover effect using GSAP (optional)
+            cards.forEach(card => {
+                card.addEventListener("mouseenter", () => {
+                    gsap.to(card, {
+                        scale: 1.05,
+                        duration: 0.3,
+                        ease: "power1.out"
+                    });
+                });
+                card.addEventListener("mouseleave", () => {
+                    gsap.to(card, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: "power1.in"
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Featured Events end -->
+
+    <!-- gallery start -->
+<style>
+    .gallery-container {
+        background-color: #B5875E;
+        padding: 50px 20px;
+    }
+
+    .gallery-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .gallery-header h2 {
+        font-size: 2.5rem;
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .gallery-header p {
+        font-size: 1.2rem;
+        color: #f7ede2;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        opacity: 0; /* Initially hidden for animation */
+        transform: translateY(50px); /* Start position for animation */
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        border: 5px solid #fff;
+        border-radius: 10px;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .gallery-caption {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        font-size: 1rem;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .gallery-header h2 {
+            font-size: 2rem;
+        }
+
+        .gallery-header p {
+            font-size: 1rem;
+        }
+
+        .gallery-caption {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<div class="gallery-container">
+    <div class="gallery-header">
+        <h2>Event Highlights</h2>
+        <p>A collection of memories and milestones from our past events</p>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="./assets/home/event2.jpg" alt="Event 1">
+            <div class="gallery-caption">Community Gathering 2023</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./assets/home/event2.jpg" alt="Event 2">
+            <div class="gallery-caption">Volunteer Workshop</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./assets/home/event2.jpg" alt="Event 3">
+            <div class="gallery-caption">Fundraising Gala Night</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./assets/home/event2.jpg" alt="Event 4">
+            <div class="gallery-caption">Youth Empowerment Program</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./assets/home/event2.jpg" alt="Event 5">
+            <div class="gallery-caption">Cultural Celebration</div>
+        </div>
+        
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // GSAP Animation
+    document.addEventListener("DOMContentLoaded", function () {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade-in animation for gallery items
+        gsap.fromTo(
+            ".gallery-item",
+            {
+                opacity: 0,
+                y: 50
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2, // Adds delay between items
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".gallery-grid",
+                    start: "top 80%", // Starts when the grid enters the viewport
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+</script>
+    <!-- gallery end -->
+
+      <!-- footer start -->
+    <!-- Updated Footer Styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;  /* Reduced padding for a smaller footer */
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+    
+        footer .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px; /* Reduced gap between sections */
+        }
+    
+        footer h3 {
+            font-size: 1.6rem; /* Smaller title font size */
+            font-weight: bold;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+    
+        footer p {
+            font-size: 0.9rem; /* Reduced paragraph font size */
+            color: #ddd;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Reduced gap between social icons */
+            margin-top: 20px;
+        }
+    
+        footer .social-icons a {
+            color: white;
+            font-size: 1.5rem;  /* Smaller social icon size */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    
+        footer .social-icons a:hover {
+            color: #C9986F;
+        }
+    
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* Reduced gap between footer links */
+            margin-top: 20px;
+        }
+    
+        footer .footer-links a {
+            color: white;
+            font-size: 0.9rem; /* Reduced link font size */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    
+        footer .footer-links a:hover {
+            color: #C9986F;
+        }
+    
+        /* Footer Bottom Section */
+        footer .footer-bottom {
+            margin-top: 30px;
+            font-size: 0.85rem; /* Reduced bottom text font size */
+            color: #aaa;
+        }
+    
+        footer .footer-bottom a {
+            color: #aaa;
+            text-decoration: none;
+        }
+    
+        footer .footer-bottom a:hover {
+            color: #C9986F;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            footer h3 {
+                font-size: 1.4rem;
+            }
+    
+            footer .social-icons a {
+                font-size: 1.3rem;
+            }
+    
+            footer .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+    
+            footer .footer-links a {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <!-- Footer Title -->
+            <h3>Stay Connected with Us</h3>
+            
+            <!-- Description -->
+            <p>Join us in making a difference. Your support, whether large or small, helps us to make a positive impact. Stay informed and get involved!</p>
+    
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+    
+            <!-- Footer Links -->
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+    
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 Brahaspati Publications. All Rights Reserved.</p>
+                <p>Designed with <span style="color: #C9986F;">&#9829;</span> by Our Team</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- GSAP Animations -->
+    <script>
+        window.addEventListener("load", () => {
+            // Fade-in animation for footer content
+            gsap.fromTo("footer h3", 
+                { opacity: 0, y: -50 }, 
+                { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+            );
+    
+            gsap.fromTo("footer p", 
+                { opacity: 0, y: 50 }, 
+                { opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: 0.3 }
+            );
+    
+            gsap.fromTo(".social-icons a", 
+                { opacity: 0, y: 20 }, 
+                { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out", delay: 0.5 }
+            );
+    
+            gsap.fromTo(".footer-links a", 
+                { opacity: 0, y: 20 }, 
+                { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out", delay: 0.7 }
+            );
+    
+            gsap.fromTo(".footer-bottom p", 
+                { opacity: 0, y: 50 }, 
+                { opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: 1 }
+            );
+        });
+    </script>
+    
+
+<!-- footer end  -->
+</body>
+</html> 
+
+
